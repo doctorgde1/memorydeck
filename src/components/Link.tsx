@@ -1,12 +1,20 @@
 export interface ILink {
   color: 'transparent' | 'blue' | 'gray';
   size?: 'fit' | 'sm' | 'md' | 'lg' | 'xl';
+  onClick?: React.MouseEventHandler;
   className?: string;
   to: string;
   children: React.ReactNode;
 }
 
-const Link: React.FC<ILink> = ({ color, to, size = 'md', className, children }) => {
+const Link: React.FC<ILink> = ({
+  color,
+  to,
+  size = 'md',
+  onClick,
+  className,
+  children,
+}) => {
   const colorVariants = {
     transparent: 'bg-transparent',
     blue: 'bg-vivid-blue hover:bg-strong-blue fill-white text-white',
@@ -23,6 +31,7 @@ const Link: React.FC<ILink> = ({ color, to, size = 'md', className, children }) 
     <>
       <a
         href={to}
+        onClick={onClick}
         className={`${colorVariants[color]} ${sizes[size]} ${className} uppercase rounded transition-colors duration-300 ease-out text-center text-base font-semibold font-sans container group flex items-center justify-center`}
       >
         {children}
